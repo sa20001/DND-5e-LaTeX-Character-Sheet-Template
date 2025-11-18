@@ -1,0 +1,26 @@
+{
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (lualatex)",
+            "tools": [
+                "lualatexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "lualatexmk",
+            "command": "build-latex.sh",
+            "args": [
+                "%OUTDIR%",
+                "%DOC%",
+                "%WORKSPACE_FOLDER%"
+            ],
+            "env": {
+                "TEXINPUTS": "%WORKSPACE_FOLDER%/lib//:%WORKSPACE_FOLDER%:",
+                "PATH": "%WORKSPACE_FOLDER%/.vscode:/usr/local/bin:/usr/bin:/bin"
+            }
+        }
+    ],
+    "latex-workshop.latex.autoBuild.run": "onSave"
+}
