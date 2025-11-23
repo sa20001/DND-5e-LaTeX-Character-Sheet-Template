@@ -1,5 +1,15 @@
 % BANNER INFO
 \newcommand{\CharacterNameValue}{}
+\newcommand{\CharacterSurnameValue}{}
+\newcommand{\CharacterNickNameValue}{}
+% \newcommand{\CharacterFullNameValue}{\CharacterNameValue\ "\CharacterNickNameValue" \CharacterSurnameValue}
+\newcommand{\CharacterFullNameValue}{%
+  \CharacterNameValue\ %
+  \ifdefempty{\CharacterNickNameValue}%
+    {}%
+    {``\CharacterNickNameValue''\ }%
+  \CharacterSurnameValue%
+}
 \newcommand{\ClassValue}{}
 \newcommand{\BackgroundValue}{}
 \newcommand{\PlayerNameValue}{}
@@ -8,6 +18,8 @@
 \newcommand{\XPValue}{}
 
 \newcommand{\CharacterName}[1]{\renewcommand{\CharacterNameValue}{#1}}
+\newcommand{\CharacterSurname}[1]{\renewcommand{\CharacterSurnameValue}{#1}}
+\newcommand{\CharacterNickname}[1]{\renewcommand{\CharacterNickNameValue}{#1}}
 \newcommand{\Class}[1]{\renewcommand{\ClassValue}{#1}}
 \newcommand{\Background}[1]{\renewcommand{\BackgroundValue}{#1}}
 \newcommand{\PlayerName}[1]{\renewcommand{\PlayerNameValue}{#1}}
@@ -16,12 +28,16 @@
 \newcommand{\XP}[1]{\renewcommand{\XPValue}{#1}}
 
 % PROFICIENCY ETC
+\newcommand{\LevelValue}{}
 \newcommand{\InspirationValue}{}
 \newcommand{\ProficiencyValue}{}
 \newcommand{\PerceptionValue}{}
 
 \newcommand{\Inspiration}[1]{\renewcommand{\InspirationValue}{#1}}
-\newcommand{\Proficiency}[1]{\renewcommand{\ProficiencyValue}{#1}}
+\newcommand{\Level}[1]{%
+    \renewcommand{\ProficiencyValue}{\fpeval{floor((#1-1)/4) + 2}}%
+	\renewcommand{\LevelValue}{#1}%
+}
 \newcommand{\Perception}[1]{\renewcommand{\PerceptionValue}{#1}}
 
 % ABILITY SCORES
@@ -38,21 +54,6 @@
 \newcommand{\IntelligenceScore}[1]{\renewcommand{\IntelligenceScoreValue}{#1}}
 \newcommand{\WisdomScore}[1]{\renewcommand{\WisdomScoreValue}{#1}}
 \newcommand{\CharismaScore}[1]{\renewcommand{\CharismaScoreValue}{#1}}
-
-% ABILITY MODIFIERS
-\newcommand{\StrengthModifierValue}{}
-\newcommand{\DexterityModifierValue}{}
-\newcommand{\ConstitutionModifierValue}{}
-\newcommand{\IntelligenceModifierValue}{}
-\newcommand{\WisdomModifierValue}{}
-\newcommand{\CharismaModifierValue}{}
-
-\newcommand{\StrengthModifier}[1]{\renewcommand{\StrengthModifierValue}{#1}}
-\newcommand{\DexterityModifier}[1]{\renewcommand{\DexterityModifierValue}{#1}}
-\newcommand{\ConstitutionModifier}[1]{\renewcommand{\ConstitutionModifierValue}{#1}}
-\newcommand{\IntelligenceModifier}[1]{\renewcommand{\IntelligenceModifierValue}{#1}}
-\newcommand{\WisdomModifier}[1]{\renewcommand{\WisdomModifierValue}{#1}}
-\newcommand{\CharismaModifier}[1]{\renewcommand{\CharismaModifierValue}{#1}}
 
 % SAVING THROWS
 \newcommand{\StrengthSavingThrowModifierValue}{}

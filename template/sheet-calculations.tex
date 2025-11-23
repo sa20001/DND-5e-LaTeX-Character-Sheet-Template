@@ -1,37 +1,58 @@
-\newcommand{\SetProficiency}[1]{
-	\Proficiency{#1}
-	\newcommand\ProficiencyHalfValue{\fpeval{floor(#1/2,0)}}
+% ABILITY MODIFIERS
+\newcommand{\StrengthModifierValue}{}
+\newcommand{\DexterityModifierValue}{}
+\newcommand{\ConstitutionModifierValue}{}
+\newcommand{\IntelligenceModifierValue}{}
+\newcommand{\WisdomModifierValue}{}
+\newcommand{\CharismaModifierValue}{}
+
+% -------------------------------
+% Ability modifier calculation
+% -------------------------------
+\newcommand{\AbilityModifier}[1]{\fpeval{floor((#1-10)/2)}}
+
+% -------------------------------
+% Strength
+% -------------------------------
+\newcommand{\StrengthModifier}[1]{%
+    \renewcommand{\StrengthModifierValue}{\fpeval{\AbilityModifier{\StrengthScoreValue} + (#1)}}%
 }
 
-\newcommand{\SetStrength}[1]{
-	\StrengthScore{#1}
-	\renewcommand\StrengthModifierValue{\fpeval{floor((#1-10)/2,0)}}
+% -------------------------------
+% Dexterity
+% -------------------------------
+\newcommand{\DexterityModifier}[1]{%
+    \renewcommand{\DexterityModifierValue}{\fpeval{\AbilityModifier{\DexterityScoreValue} + (#1)}}%
 }
 
-\newcommand{\SetDexterity}[1]{
-	\DexterityScore{#1}
-	\renewcommand\DexterityModifierValue{\fpeval{floor((#1-10)/2,0)}}
+% -------------------------------
+% Constitution
+% -------------------------------
+\newcommand{\ConstitutionModifier}[1]{%
+    \renewcommand{\ConstitutionModifierValue}{\fpeval{\AbilityModifier{\ConstitutionScoreValue} + (#1)}}%
 }
 
-\newcommand{\SetConstitution}[1]{
-	\ConstitutionScore{#1}
-	\renewcommand\ConstitutionModifierValue{\fpeval{floor((#1-10)/2,0)}}
+% -------------------------------
+% Intelligence
+% -------------------------------
+\newcommand{\IntelligenceModifier}[1]{%
+    \renewcommand{\IntelligenceModifierValue}{\fpeval{\AbilityModifier{\IntelligenceScoreValue} + (#1)}}%
 }
 
-\newcommand{\SetIntelligence}[1]{
-	\IntelligenceScore{#1}
-	\renewcommand\IntelligenceModifierValue{\fpeval{floor((#1-10)/2,0)}}
+% -------------------------------
+% Wisdom
+% -------------------------------
+\newcommand{\WisdomModifier}[1]{%
+    \renewcommand{\WisdomModifierValue}{\fpeval{\AbilityModifier{\WisdomScoreValue} + (#1)}}%
 }
 
-\newcommand{\SetWisdom}[1]{
-	\WisdomScore{#1}
-	\renewcommand\WisdomModifierValue{\fpeval{floor((#1-10)/2,0)}}
+% -------------------------------
+% Charisma
+% -------------------------------
+\newcommand{\CharismaModifier}[1]{%
+    \renewcommand{\CharismaModifierValue}{\fpeval{\AbilityModifier{\CharismaScoreValue} + (#1)}}%
 }
 
-\newcommand{\SetCharisma}[1]{
-	\CharismaScore{#1}
-	\renewcommand\CharismaModifierValue{\fpeval{floor((#1-10)/2,0)}}
-}
 
 \newcommand{\StrengthProficiencyValue}{}
 \newcommand{\SetStrengthProficiency}[1]{
@@ -770,3 +791,23 @@
 	\SpellSaveDC{\fpeval{8 + \CharismaModifierValue + \ProficiencyValue + #1}}
 	\SpellAttackBonus{\fpeval{\CharismaModifierValue + \ProficiencyValue}}
 }
+
+\ExplSyntaxOn
+% Floating-point variable for total weight
+\fp_new:N \l_equipment_weight_fp
+\fp_set:Nn \l_equipment_weight_fp { 0 } % counter = 0
+
+% Function to add equipment item
+% #1 = equipment name, #2 = weight, #3 = quantity
+\cs_new:Npn \EquipmentItem #1#2#3
+{
+    #1 (#3) % print name and quantity
+    % add weight*quantity to counter
+    \fp_add:Nn \l_equipment_weight_fp { #2 * #3 }
+}
+
+% Retrieve total weight
+\cs_new:Npn \EquipmentTotalWeight {
+    \fp_use:N \l_equipment_weight_fp
+}
+\ExplSyntaxOff

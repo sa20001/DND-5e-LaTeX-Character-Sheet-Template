@@ -1,0 +1,304 @@
+\documentclass[letterpaper,openany,oneside,twocolumn]{book}
+
+\usepackage[justified]{dnd}
+\usepackage{ifthen}
+
+\usepackage{dndtemplate}
+\usepackage{bookmark}
+
+\setlength\oddsidemargin{\dimexpr(\paperwidth-\textwidth)/2 - 1in\relax}
+\setlength\evensidemargin{\oddsidemargin}
+
+% Headline
+\CharacterName{Name}
+\CharacterSurname{Surname} % Optional surname, can be left empty
+\CharacterNickname{Nickname} % Optional nickname, can be left empty
+
+% adds only main class and total level to prevent overflow
+\Class{Character class here}
+\Background{Character background here}
+\PlayerName{Your name here}
+\Race{Character race here}
+\Alignment{Character alignment here}
+\XP{} % xp or milestone progression
+\Level{1} % total character level
+\Inspiration{} % number of inspiration points
+
+
+% -------------------------------
+%% ABILITIES %%
+
+% Ability scores
+\StrengthScore{0}          
+\DexterityScore{0}         
+\ConstitutionScore{0}      
+\IntelligenceScore{0}      
+\WisdomScore{0}            
+\CharismaScore{0}          
+
+% Ability Modifiers
+% The base modifier for each ability is calculated automatically from the ability scores using the formula:
+%   Modifier = floor((Score - 10)/2)
+% You can add an offset for racial traits, magic items, feats or other effects.
+\StrengthModifier{0}       % Base calculation, no offset
+\DexterityModifier{0}      % Base calculation, no offset
+\ConstitutionModifier{0}   % Base calculation, no offset
+\IntelligenceModifier{0}   % Base calculation, no offset
+\WisdomModifier{0}         % Base calculation, no offset
+\CharismaModifier{0}       % Base calculation, no offset
+
+
+% -------------------------------
+%% SAVING THROWS %%
+
+% Saving Throws Proficiencies
+\SetStrengthProficiency{0}
+\SetDexterityProficiency{0}
+\SetConstitutionProficiency{0}
+\SetIntelligenceProficiency{0}
+\SetWisdomProficiency{0}
+\SetCharismaProficiency{0}
+
+% The base modifier for each ability is calculated automatically from the ability scores using the formula:
+%   Saving throw value = Ability modifier + Proficiency Bonus (if proficient)
+% You can add an offset for racial traits, magic items, feats or other effects.
+\SetStrengthSavingThrowModifier{0}      % Base calculation, no offset
+\SetDexteritySavingThrowModifier{0}     % Base calculation, no offset
+\SetConstitutionSavingThrowModifier{0}  % Base calculation, no offset
+\SetIntelligenceSavingThrowModifier{0}  % Base calculation, no offset
+\SetWisdomSavingThrowModifier{0}        % Base calculation, no offset
+\SetCharismaSavingThrowModifier{0}      % Base calculation, no offset
+
+
+% -------------------------------
+%% SKILLS %%
+% Skills Proficiencies
+\SetAcrobaticsProficiency{0}           
+\SetAnimalHandlingProficiency{0}
+\SetArcanaProficiency{0}
+\SetAthleticsProficiency{0}
+\SetDeceptionProficiency{0}            
+\SetHistoryProficiency{0}
+\SetInsightProficiency{0}
+\SetIntimidationProficiency{0}
+\SetInvestigationProficiency{0}        
+\SetMedicineProficiency{0}
+\SetNatureProficiency{0}               
+\SetPerceptionProficiency{0}           
+\SetPerformanceProficiency{0}
+\SetPersuasionProficiency{0}           
+\SetReligionProficiency{0}
+\SetSleightOfHandProficiency{0}        
+\SetStealthProficiency{0}              
+\SetSurvivalProficiency{0}             
+
+% The base modifier for each ability is calculated automatically from the ability scores using the formula:
+%  Skill value = Ability modifier + Proficiency Bonus (if proficient)
+% You can add an offset for racial traits, magic items, feats or other effects.
+\SetAcrobaticsSkillModifier{0}          % Base calculation, no offset
+\SetAnimalHandlingSkillModifier{0}      % Base calculation, no offset
+\SetArcanaSkillModifier{0}              % Base calculation, no offset
+\SetAthleticsSkillModifier{0}           % Base calculation, no offset
+\SetDeceptionSkillModifier{0}           % Base calculation, no offset
+\SetHistorySkillModifier{0}             % Base calculation, no offset
+\SetInsightSkillModifier{0}             % Base calculation, no offset
+\SetIntimidationSkillModifier{0}        % Base calculation, no offset
+\SetInvestigationSkillModifier{0}       % Base calculation, no offset
+\SetMedicineSkillModifier{0}            % Base calculation, no offset
+\SetNatureSkillModifier{0}              % Base calculation, no offset
+\SetPerceptionSkillModifier{0}          % Base calculation, no offset
+\SetPerformanceSkillModifier{0}         % Base calculation, no offset
+\SetPersuasionSkillModifier{0}          % Base calculation, no offset
+\SetReligionSkillModifier{0}            % Base calculation, no offset
+\SetSleightOfHandSkillModifier{0}       % Base calculation, no offset
+\SetStealthSkillModifier{0}             % Base calculation, no offset
+\SetSurvivalSkillModifier{0}            % Base calculation, no offset
+
+\Perception{\fpeval{10+\PerceptionSkillModifierValue}}
+
+\ArmorClass{
+    \fpeval{
+        % 11+ % Base AC for Leather Armor
+        % \DexterityModifierValue % Leather armor use dex modifier
+    }
+}
+
+\Initiative{\DexterityModifierValue}
+
+\Speed{\parbox{40pt}{\centering 0~m
+\small{(0~swim)}}}
+
+\MaxHitPoints{    \fpeval{
+    % max hp given by class levels and constitution modifier
+        \ConstitutionModifierValue * \LevelValue % Total levels
+    }
+}
+
+\MaxHitDice{\LevelValue dx}
+\CurrentHitDice{\LevelValue}
+
+\CP{}
+\SP{}
+\GP{}
+\EP{}
+\PP{}
+
+% p = piercing, s = slashing, b = bludgeoning, r = radiant, f = fire, c = cold, n = necrotic, a = acid, l = lightning, t = thunder, ps = psychic, hp = healing
+\AddWeapon{Weapon Name}{\fpeval{
+    \ProficiencyValue % If proficient with the weapon
+    % + \DexterityModifierValue or \StrengthModifierValue depending on weapon type
+    }}{xdx
+% + \DexterityModifierValue or \StrengthModifierValue depending on weapon type
+~/p}
+
+% e.g.
+% \AddWeapon{Shortbow}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{1d6+
+% \DexterityModifierValue~/ % Because ranged weapon has dex modifier to damage
+% (x/96)-% Short bow has range 24/96 m, beyond 24 m you have disadvantage (my char has no disadvantage because has sharpshooter feat), you can not shoot beyond 96 m
+% p
+% }
+
+
+\AttacksAdditional{
+\textbf{Spell Name}: att. +x, dmg xdx/r\\
+}
+
+\OtherProficienciesLanguages{\textbf{Languages:} Common, ...\\
+\textbf{Weapons}: Simple weapons, ...\\
+\textbf{Armor}: Light Armor, ..\\
+\textbf{Tools}: Thieves' Tools (Expertise), % Expertise instead of proficiency
+Gaming set, ...\\ % Only proficiency
+}
+
+%% EQUIPMENT %%
+% Add equipment items using the \EquipmentItem{name of the equipment}{weight}{quantity} command
+
+\Equipment{
+\textbf{Weapons}: \EquipmentItem{Rapier}{1}{1}\\
+\textbf{Armor}: \EquipmentItem{Leather Armor}{5}{1}\\
+\textbf{Tools}: \EquipmentItem{Thieves' Tools}{0.5}{1}\\ 
+\textbf{Mounts/Animals}: Mule\\
+\textbf{Misc}: \EquipmentItem{Traveler Clothes}{2}{1}\\
+\\
+\textbf{Weight:} \EquipmentTotalWeight\ kg \\
+\textbf{Capacity:} \newcommand{\Capacity}{\fpeval{
+    \StrengthScoreValue*3+ % Homebrew carrying capacity formula
+    210 % From mule
+}}\Capacity\ kg\\
+\textbf{Residual capacity:} \fpeval{\Capacity - \EquipmentTotalWeight} kg
+}
+
+
+
+\PersonalityTraits{
+    % Character personality traits here
+}
+
+\Ideals{
+    % Character ideals here
+}
+
+\Bonds{
+    % Character bonds here
+}
+
+\Flaws{
+    % Character flaws here
+}
+
+
+\FeaturesTraits{
+% Character features and traits here
+}
+
+\AdditionalFeaturesAndTraits{
+    % Additional character features and traits here
+}
+
+% Appearance
+
+\Age{xx}
+\Height{xx m}
+\Weight{xx kg}
+\Eyes{xx}
+\Skin{xx}
+\Hair{xx}
+
+% background
+
+\CharacterAppearance{
+% \includegraphics[width=5.75cm]{characters/images/character_image.png}
+}
+
+
+
+\Characterbackground{
+    % Brief character background here
+ }
+
+\Treasure{
+    % Character treasure here
+}
+
+\AlliesAndOrganizations{
+    % Character allies and organizations here
+}
+
+\OrganizationName{
+    % Organization name here
+}
+\OrganizationSymbol{
+    % \includegraphics[width=4.9cm,height=3.9cm]{characters/images/organization-banner}
+}
+
+
+%Magic
+\SpellcastingClass{}
+\SpellcastingAbility{}
+\SpellSaveDC{}
+\SpellAttackBonus{}
+
+\FirstLevelSpellSlotsTotal{}
+
+\FirstLevelSpellSlotA{}
+\FirstLevelSpellSlotAPrepared{}
+\FirstLevelSpellSlotB{}
+\FirstLevelSpellSlotBPrepared{}
+\FirstLevelSpellSlotC{}
+\FirstLevelSpellSlotCPrepared{}
+\FirstLevelSpellSlotD{}
+\FirstLevelSpellSlotDPrepared{}
+\FirstLevelSpellSlotE{}
+\FirstLevelSpellSlotEPrepared{}
+\CantripSlotA{}
+\CantripSlotB{}
+\CantripSlotC{}
+\CantripSlotD{}
+
+\newcommand{\spellsheetchoice}{\renderspellsheet}
+
+
+\begin{document}
+\newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+\onecolumn
+
+
+% CHARACTER PAGE
+\pdfbookmark[0]{Character Sheet}{Character Sheet}
+\rendercharactersheet
+
+% BACKSTORY PAGE
+\pdfbookmark[0]{Background Sheet}{Background Sheet}
+\renderbackgroundsheet
+
+
+% SPELLCASTING PAGE
+\pdfbookmark[0]{Spellcasting Sheet}{Spellcasting Sheet}
+\spellsheetchoice
+
+% Character full background, or comment out if not needed
+\newpage
+\section{Full Character Background of \CharacterFullNameValue}
+    % Character full background here
+
+\end{document}
