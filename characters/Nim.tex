@@ -15,13 +15,13 @@
 \CharacterNickname{Nim}
 
 % adds only main class and total level to prevent overflow
-\Class{Rogue (4) / Ranger (1)}
+\Class{Rogue (4) / Ranger (2)}
 \Background{\href{https://dnd.wizards.com/products/tabletop-games/rpg-products/scag}{Urban Bounty Hunter (SCAG)}}
 \PlayerName{Sam}
 \Race{Lightfoot Halfling}
 \Alignment{Neutral}
 \XP{Milestone}
-\Level{5} % total character level
+\Level{6} % total character level
 
 % -------------------------------
 %% ABILITIES %%
@@ -32,7 +32,7 @@
 \ConstitutionScore{16}      % Rolled 5,5,6,1 = 16
 \IntelligenceScore{13}      % Rolled 5,5,3,2 = 13
 \WisdomScore{18}            % Rolled 6,6,6,6 = 18
-\CharismaScore{16}          % Rolled 6,5,4,1 = 15 + 1 (Halfling Lightfoot) = 16
+\CharismaScore{17}          % Rolled 6,5,4,1 = 15 + 1 (Halfling Lightfoot) + 1 (Second Chance) = 17
 
 % Ability Modifiers
 % The base modifier for each ability is calculated automatically from the ability scores using the formula:
@@ -118,7 +118,7 @@
 
 \ArmorClass{
     \fpeval{
-        11+ % Base AC for Leather Armor
+        12+ % Base AC for Studded Leather Armor
         \DexterityModifierValue
     }
 }
@@ -126,36 +126,41 @@
 \Speed{\parbox{40pt}{\centering 7.5~m
 
 \small{(4.5~swim)}}}
+
+% TODO: update manually
 \MaxHitPoints{    \fpeval{
         8+ % Rogue first level
         8+ % Rolled at rogue level 2
         7+ % Rolled at rogue level 3
         3+ % Rolled at rogue level 4
         6+ % Default increase at ranger level 1
+        6+ % Default increase at ranger level 2
         \ConstitutionModifierValue * \LevelValue % Total levels
     }
 }
 
-
-\MaxHitDice{4d6+1d10}   % 4 from rogue, 1 from ranger
+% TODO: update manually
+\MaxHitDice{4d6+2d10}   % 4 from rogue, 1 from ranger
 \CurrentHitDice{\LevelValue}
 
 \CP{}
 \SP{}
-\GP{12} % 20 from Urban Bounty Hunter background, -8 for mule
+\GP{232}
 \EP{}
 \PP{}
 
 % p = piercing, s = slashing, b = bludgeoning, 
-\AddWeapon{Shortbow}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{1d6+
+\AddWeapon{Longbow}{\fpeval{\ProficiencyValue+\DexterityModifierValue 
++ 2 % From Archery (Ranger Fighting Style)
+}}{1d8 +
 \DexterityModifierValue~/ % Because ranged weapon has dex modifier to damage
-(x/96)-% Short bow has range 24/96 m, beyond 24 m you have disadvantage (my char has no disadvantage because has sharpshooter feat), you can not shoot beyond 96 m
+(x/180)-% Short bow has range 45/180 m, beyond 45 m you have disadvantage (my char has no disadvantage because has sharpshooter feat), you can not shoot beyond 180 m
 p
 }
-\AddWeapon{Rapier}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{1d8+
+\AddWeapon{Rapier}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{1d8 +
 \DexterityModifierValue~/ % Because finesse weapon has dex modifier to damage
 p}
-\AddWeapon{Dagger}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{d4+
+\AddWeapon{Dagger}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{d4 +
 \DexterityModifierValue~/ % Because finesse weapon has dex modifier to damage
 (x/18)-% Dagger has range 6/18 m, beyond 6 m you have disadvantage (my char has no disadvantage because has sharpshooter feat), you can not throw beyond 18 m
 p}
@@ -167,8 +172,7 @@ p}
 
 \OtherProficienciesLanguages{\textbf{Languages:} Halfling, Common, Orchish, % From Halfling + Background
 Ogrish, Goblin. \\ % From Ranger-Deft Explorer-Canny + Background
-\textbf{Weapons}: Simple weapons, hand crossbows, longswords, rapiers, shortswords, % From Rogue class
-simple weapons, martial weapons.\\ % From Ranger class
+\textbf{Weapons}: Simple weapons, martial weapons.\\ % From Ranger class
 \textbf{Armor}: Light Armor, % From Rogue Class
 medium armor, shields.\\ % From Ranger class
 \textbf{Tools}: Thieves' Tools (Expertise), % From rogue class, expertise from rogue lv1
@@ -180,9 +184,9 @@ Musical instrument. % From Urban Bounty Hunter background
 
 \Equipment{
 \textbf{Weapons}: \EquipmentItem{Rapier}{1}{1}, % From Rogue class
-\EquipmentItem{Shortbow}{1}{1} + \EquipmentItem{Arrows}{0.025}{20}, % From Rogue class
+\EquipmentItem{Longbow}{1}{1} + \EquipmentItem{Arrows}{0.025}{20}, % From Rogue class
 \EquipmentItem{Dagger}{0.5}{2}.\\% From Rogue class
-\textbf{Armor}: \EquipmentItem{Leather Armor}{5}{1}\\ % From Rogue class
+\textbf{Armor}: \EquipmentItem{Studded Leather Armor}{6.5}{1}\\ % From Rogue class
 \textbf{Tools}: \EquipmentItem{Thieves' Tools}{0.5}{1}\\ % From Rogue class
 \textbf{Mounts/Animals}: Mule\\
 \textbf{Misc}: \EquipmentItem{Traveler Clothes}{2}{1}, % From Urban Bounty Hunter background
@@ -243,6 +247,7 @@ Musical instrument. % From Urban Bounty Hunter background
 \textbf{Nimble}\\
 \textbf{Lucky}\\
 \textbf{Brave}\\
+\textbf{Second Chance}\\
 \textbf{Natural stealthy}\\
 \textbf{Ear to the Ground}\\
 \textbf{Sneak Attack}\\
@@ -251,17 +256,16 @@ Musical instrument. % From Urban Bounty Hunter background
 \textbf{Skirmisher}\\
 \textbf{Steady Aim}\\
 \textbf{Favored foe}\\
-\textbf{Sharpshooter}
+\textbf{Sharpshooter}\\
+\textbf{Barren}\\
 }
 
 \AdditionalFeaturesAndTraits{
-\textbf{Archetypes}:\\
-Rogue-\href{https://dnd5e.wikidot.com/rogue:scout}{Scout}\\
-Ranger-\\
 % From Halfling race
 \textbf{Nimble}-> You can move through the space of any creature that is of a size larger than yours.\\
 \textbf{Lucky}-> When you roll a \textbf{1} on the d20 for an attack roll, ability check, or saving throw, you can \textbf{reroll} the die and must use the new roll.\\
 \textbf{Brave}-> You have \textbf{advantage} on saving throws against being \textbf{frightened}.\\
+\textbf{Second Chance}-> can \textbf{force enemy attack roll reroll} if you see the enemy. Reset after new combat (after initiative roll) or short rest.\\
 \textbf{Natural stealthy}-> You can attempt to hide even when you are only \textbf{obscured} by a creature that is at least one size larger than you.\\
 % Background Feature from Urban Bounty Hunter
 \textbf{Ear to the Ground}-> you have a \textbf{contact} in any city you visit, a person who provides information about the people and places of the local area.\\
@@ -274,7 +278,8 @@ Ranger-\\
 % Ranger class features
 \textbf{Favored foe}-> mark target for 1 minute or until lose concentration, on hit the target receives \textbf{1d4} extra damage. Can be used \textbf{\ProficiencyValue} times per longrest.\\
 % Talents
-\textbf{Sharpshooter}-> Attacks at long range don't impose disadvantage, ignore half and three-quarters cover, before attack you can choose to take \textbf{-5} to hit for \textbf{+10} damage.
+\textbf{Sharpshooter}-> Attacks at long range don't impose disadvantage, ignore half and three-quarters cover, before attack you can choose to take \textbf{-5} to hit for \textbf{+10} damage.\\
+\textbf{Barren}-> You can't conceive children.
 }
 
 % Appearance
@@ -309,7 +314,7 @@ Ranger-\\
     \begin{itemize}
         \item The Amazons: Mercenary clan and spiritual mentors who saved her from slavery.
         \item Former contacts from bounty hunting along the Sword Coast: informants, guides, and fences.
-        \item Luna: A young Amazon recruit who admires Nimrielle and reminds her of a lost innocence.
+        \item Luna: A young Amazon recruit who admires Nimrielle and reminds her of her lost innocence.
     \end{itemize}
 }
 
@@ -320,17 +325,17 @@ Ranger-\\
 
 
 %Magic
-\SpellcastingClass{}
-\SpellcastingAbility{}
-\SpellSaveDC{}
-\SpellAttackBonus{}
+\SpellcastingClass{Ranger}
+\SpellcastingAbility{\WisdomModifierValue}
+\SpellSaveDC{\fpeval{8+ \ProficiencyValue + \WisdomModifierValue}}
+\SpellAttackBonus{ \fpeval{\ProficiencyValue + \WisdomModifierValue}}
 
-\FirstLevelSpellSlotsTotal{}
+\FirstLevelSpellSlotsTotal{2}
 
-\FirstLevelSpellSlotA{}
-\FirstLevelSpellSlotAPrepared{}
-\FirstLevelSpellSlotB{}
-\FirstLevelSpellSlotBPrepared{}
+\FirstLevelSpellSlotA{Hunter's Mark} % https://dnd5e.wikidot.com/spell:hunters-mark
+\FirstLevelSpellSlotAPrepared{True}
+\FirstLevelSpellSlotB{Hails of Thorns}
+\FirstLevelSpellSlotBPrepared{True}
 \FirstLevelSpellSlotC{}
 \FirstLevelSpellSlotCPrepared{}
 \FirstLevelSpellSlotD{}
@@ -364,6 +369,91 @@ Ranger-\\
 % SPELLCASTING PAGE
 \pdfbookmark[0]{Spellcasting Sheet}{Spellcasting Sheet}
 \spellsheetchoice
+
+\newpage
+
+\section{Combat Action Guide}
+
+\subsection{Offense}
+\begin{enumerate}[label=\Alph*), itemsep=1.5em]
+
+% --- Longbow blob ---
+\item \textbf{Longbow — Long Range + Hidden + Multiple Enemies (Blob)}
+    \begin{enumerate}[label=\arabic*.]
+        \item Spell: \href{https://dnd5e.wikidot.com/spell:hail-of-thorns}{\textit{Hail of Thorns}} (if spell slot available)
+        \item Position: Hidden → gain advantage
+        \item Feat: \href{https://dnd5e.wikidot.com/feat:sharpshooter}{Sharpshooter} (-5 to attack bonus, +10 damage)
+        \item Class Feature: \href{https://dnd5e.wikidot.com/rogue\#:~:text=gain\%20this\%20benefit.-,Sneak\%20Attack,-Beginning\%20at\%201st}{Sneak Attack} (applies because of advantage)
+        \item Damage Calculation: Weapon dmg (1d8 + Dex) + Sneak Attack (2d6) + Sharpshooter (+10) + Hail of Thorns
+        \item Spell Note: Hail of Thorns damage repeats for every attack hit until concentration ends (1 min)
+        \item Bonus Action to get advantage on next turn:
+        \begin{itemize}
+            \item \href{https://roll20.net/compendium/dnd5e/Combat\#toc_27}{Hide} → leverage \href{https://dnd5e.wikidot.com/lineage:halfling\#:~:text=increases\%20by\%201.-,Naturally\%20Stealthy,-.\%20You\%20can}{\textbf{Natural Stealthy}}
+            \item  \textbf{OR} \href{https://dnd5e.wikidot.com/rogue\#:~:text=Psionic\%20Options\%20Revisited-,Steady\%20Aim,-(Optional)}{Steady Aim} (if no advantage)
+        \end{itemize}
+    \end{enumerate}
+
+% --- Longbow scattered with Hunter's Mark ---
+\item \textbf{Longbow — Long Range + Hidden + Multiple Enemies (Scattered)}
+    \begin{enumerate}[label=\arabic*.]
+        \item Spell: \href{https://dnd5e.wikidot.com/spell:hunters-mark}{\textit{Hunter's Mark}} (if spell slot available)
+        \item Position: Hidden → gain advantage
+        \item Feat: \href{https://dnd5e.wikidot.com/feat:sharpshooter}{Sharpshooter} (-5 to attack bonus, +10 damage)
+        \item Class Feature: \href{https://dnd5e.wikidot.com/rogue\#:~:text=gain\%20this\%20benefit.-,Sneak\%20Attack,-Beginning\%20at\%201st}{Sneak Attack} (applies because of advantage)
+        \item Damage Calculation: Weapon dmg (1d8 + Dex) + Sneak Attack (2d6) + Sharpshooter (+10) + Hunter's Mark
+        \item Spell Note: Hunter's Mark damage repeats for every attack hit until concentration ends (1 hour)
+        \item Bonus Action to get advantage on next turn:
+        \begin{itemize}
+            \item \href{https://roll20.net/compendium/dnd5e/Combat\#toc_27}{Hide} → leverage \href{https://dnd5e.wikidot.com/lineage:halfling\#:~:text=increases\%20by\%201.-,Naturally\%20Stealthy,-.\%20You\%20can}{\textbf{Natural Stealthy}}
+            \item  \textbf{OR} \href{https://dnd5e.wikidot.com/rogue\#:~:text=Psionic\%20Options\%20Revisited-,Steady\%20Aim,-(Optional)}{Steady Aim} (if no advantage)
+        \end{itemize}
+    \end{enumerate}
+
+% --- Longbow scattered with Favored Foe ---
+\item \textbf{Longbow — Long Range + Hidden + Multiple Enemies (Scattered, Alternate)}
+    \begin{enumerate}[label=\arabic*.]
+        \item Feature: \href{https://dnd5e.wikidot.com/ranger\#:~:text=on\%20your\%20adventures.-,Favored\%20Foe,-(Optional)}{Favored Foe} (if available)
+        \item Position: Hidden → gain advantage
+        \item Feat: \href{https://dnd5e.wikidot.com/feat:sharpshooter}{Sharpshooter} (-5 to attack bonus, +10 damage)
+        \item Class Feature: \href{https://dnd5e.wikidot.com/rogue\#:~:text=gain\%20this\%20benefit.-,Sneak\%20Attack,-Beginning\%20at\%201st}{Sneak Attack} (applies because of advantage)
+        \item Damage Calculation: Weapon dmg (1d8 + Dex) + Sneak Attack (2d6) + Sharpshooter (+10) + Favored Foe
+        \item Feature Note: Favored Foe damage repeats for every attack hit until concentration ends (1 min)
+        \item Bonus Action to get advantage on next turn:
+        \begin{itemize}
+            \item \href{https://roll20.net/compendium/dnd5e/Combat\#toc_27}{Hide} → leverage \href{https://dnd5e.wikidot.com/lineage:halfling\#:~:text=increases\%20by\%201.-,Naturally\%20Stealthy,-.\%20You\%20can}{\textbf{Natural Stealthy}}
+            \item  \textbf{OR} \href{https://dnd5e.wikidot.com/rogue\#:~:text=Psionic\%20Options\%20Revisited-,Steady\%20Aim,-(Optional)}{Steady Aim} (if no advantage)
+        \end{itemize}
+
+    \end{enumerate}
+
+% --- Rapier melee ---
+\item \textbf{Rapier — Melee}
+    \begin{enumerate}[label=\arabic*.]
+        \item Feature: \href{https://dnd5e.wikidot.com/ranger\#:~:text=on\%20your\%20adventures.-,Favored\%20Foe,-(Optional)}{Favored Foe} (if available)
+        \item Position: Hidden → gain advantage
+        \item Class Feature: \href{https://dnd5e.wikidot.com/rogue\#:~:text=gain\%20this\%20benefit.-,Sneak\%20Attack,-Beginning\%20at\%201st}{Sneak Attack} (applies because of advantage)
+        \item Damage Calculation: Weapon dmg (1d8 + Dex) + Sneak Attack (2d6) + Favored Foe
+        \item Bonus Action:
+        \begin{itemize}
+            \item \href{https://roll20.net/compendium/dnd5e/Combat\#toc_23}{Dash} / \href{https://roll20.net/compendium/dnd5e/Combat\#toc_24}{Disengage} → reposition safely
+            \item \textbf{OR} \href{https://roll20.net/compendium/dnd5e/Combat\#toc_27}{Hide} → leverage \href{https://dnd5e.wikidot.com/lineage:halfling\#:~:text=increases\%20by\%201.-,Naturally\%20Stealthy,-.\%20You\%20can}{\textbf{Natural Stealthy}}
+        \end{itemize}
+
+    \end{enumerate}
+
+\end{enumerate}
+
+% --- Defense ---
+\subsection{Defense}
+\begin{itemize}
+    \item Reaction: \href{https://dnd5e.wikidot.com/rogue:scout#:~:text=Guide%20to%20Everything-,Skirmisher,-Starting%20at%203rd}{Skirmisher}
+    \item Feature: \href{https://dnd5e.wikidot.com/feat:second-chance}{Second Chance}
+\end{itemize}
+
+\subsection{Combat sequences}
+\begin{enumerate}
+    \item First turn A/C then B or D if melee.
+\end{enumerate}
 
 \newpage
 
@@ -410,7 +500,8 @@ The orcs of Gurthak Jawsplitter, fueled by their unchecked raids and arrogance, 
 
 As the orcs launched their attack, the mercenary cavalry appeared over a nearby hill. The battle was swift and merciless—disciplined steel and divine fury guided the Amazons’ blades, cutting down orcs where they stood. Those who fled led the scouts back to the rest of the party, only to meet the same fate. Amid the slaughter, Nimrielle was found, chained, battered, and broken in spirit.\\
 
-According to the traditions of the Clan, a freed slave was not simply liberated. She became an Ierodule of the Temple: not a servant in bondage, but a sacred acolyte, woven into the rituals of Tempus and Ishtar. Carried into the holy district, Nimrielle was tended, fed and healed. The transition from torment to sanctity was strange and at times agonizing, yet it marked the beginning of her true rebirth.\\
+According to the traditions of the Clan, a freed slave was not simply liberated. She became an Ierodule of the Temple: not a servant in bondage, but a sacred acolyte, woven into the rituals of Tempus and Ishtar. Carried into the holy district, Nimrielle was tended, fed, and healed. The transition from torment to sanctity was strange and at times agonizing, yet it marked the beginning of her true rebirth.
+During those early days of recovery, the priestesses and healers of the Amazon Clan uncovered wounds that went far deeper than bruises or broken bones. The long years of brutality at the hands of the orcs had left permanent marks on her body, and the healers eventually delivered the quiet verdict: the repeated abuse had rendered her barren.\\
 
 During the years as an Ierodule, Nimrielle learned to distinguish cruelty from reverence. She was free to refuse sacre service, free to rest, free to exist as a person rather than an object. It was during this time that the Amazons began to notice peculiar traits: Nimrielle moved without a sound and she could vanish into shadows without even trying. By the end of her Ierodule training, the Clan recognized her potential and was evaluated as a prospective recruit for the Amazon mercenary company.
 
@@ -460,7 +551,7 @@ One bleak winter morning, a letter arrived, slipped silently under the door of h
     \textit{Present yourself to the Hag's Baron in Honeywood, at dawn on the 5th of Alturiak.}\\
     \textit{Come alone.}
 \end{quote}
-Nim's stomach tightened. No one knows her by her full name \textit{Nimrielle Needleswift} only the Amazons remembered it fully. She read the words again, and a chill unlike any winter frost crept down her spine. It was not merely the cold of the North Sword Coast that struck her—it was the terror of knowing that \textit{Someone} knew. And that \textit{Someone} now demanded her presence.\\
+Nim's stomach tightened. No one knew her by her full name \textit{Nimrielle Needleswift} except some Amazons and no one except Luna knew what she did, but she would have never betrayed her. She read the words again, and a chill unlike any winter frost crept down her spine. It was not merely the cold of the North Sword Coast that struck her—it was the terror of the unknown. Someone knew. Someone had uncovered her carefully hidden past. And for the first time, two thoughts twisted together in a knot of fear: that Luna—her young protégé, innocent and trusting—might have been trapped, forced to betray her, or worse, that Luna herself could be the one who wrote the letter. Regardless, the message was clear: \textit{Someone} knew. And that \textit{Someone} now demanded her presence.\\
 
 After several days of travel, Nim arrived in Honeywood. She contacted her local informant, hoping for information about the town and any clue as to who might have sent the letter, but they had no relevant information. She also watched the area around the tavern from a discreet distance, but found nothing of note.\\
 
