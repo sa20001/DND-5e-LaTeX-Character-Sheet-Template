@@ -1,0 +1,335 @@
+\documentclass[letterpaper,openany,oneside,twocolumn]{book}
+
+\usepackage[justified]{dnd}
+\usepackage{ifthen}
+
+\usepackage{dndtemplate}
+\usepackage{bookmark}
+
+\setlength\oddsidemargin{\dimexpr(\paperwidth-\textwidth)/2 - 1in\relax}
+\setlength\evensidemargin{\oddsidemargin}
+
+% Headline
+\CharacterName{Grok}
+\CharacterSurname{Thunderborn} % Optional surname, can be left empty
+\CharacterNickname{} % Optional nickname, can be left empty
+
+\ClassOne{5}
+
+% adds only main class and total level to prevent overflow
+\Class{Paladino (\ClassOneValue)}
+\Background{Character background here}
+\PlayerName{Samy}
+\Race{Hill Dwarf}
+\Alignment{Character alignment here}
+\XP{} % xp or milestone progression
+\Inspiration{} % number of inspiration points
+
+
+% -------------------------------
+%% ABILITIES %%
+
+% Ability scores
+\StrengthScore{15}           % 6,5,4,2 = 15 
+\DexterityScore{12}          % 6,4,2,1 = 12
+\ConstitutionScore{17}       % 6,5,4,3 = 15 + 2 da Dwarf
+\IntelligenceScore{9}       % 4,4,1,1 = 9 
+\WisdomScore{11}             % 3,2,3,5 = 11 + 1 Hill dwarf  
+\CharismaScore{15}           % 6,5,4,3 = 15
+
+% Ability Modifiers
+% The base modifier for each ability is calculated automatically from the ability scores using the formula:
+%   Modifier = floor((Score - 10)/2)
+% You can add an offset for racial traits, magic items, feats or other effects.
+\StrengthModifier{0}       % Base calculation, no offset
+\DexterityModifier{0}      % Base calculation, no offset
+\ConstitutionModifier{0}   % Base calculation, no offset
+\IntelligenceModifier{0}   % Base calculation, no offset
+\WisdomModifier{0}         % Base calculation, no offset
+\CharismaModifier{0}       % Base calculation, no offset
+
+
+% -------------------------------
+%% SAVING THROWS %%
+
+% Saving Throws Proficiencies
+\SetStrengthProficiency{0}
+\SetDexterityProficiency{0}
+\SetConstitutionProficiency{0}
+\SetIntelligenceProficiency{0}
+\SetWisdomProficiency{1}
+\SetCharismaProficiency{1}
+
+% The base modifier for each ability is calculated automatically from the ability scores using the formula:
+%   Saving throw value = Ability modifier + Proficiency Bonus (if proficient)
+% You can add an offset for racial traits, magic items, feats or other effects.
+\SetStrengthSavingThrowModifier{0}      % Base calculation, no offset
+\SetDexteritySavingThrowModifier{0}     % Base calculation, no offset
+\SetConstitutionSavingThrowModifier{0}  % Base calculation, no offset
+\SetIntelligenceSavingThrowModifier{0}  % Base calculation, no offset
+\SetWisdomSavingThrowModifier{0}        % Base calculation, no offset
+\SetCharismaSavingThrowModifier{0}      % Base calculation, no offset
+
+
+% -------------------------------
+%% SKILLS %%
+% Skills Proficiencies
+\SetAcrobaticsProficiency{0}           
+\SetAnimalHandlingProficiency{0} 
+\SetArcanaProficiency{0}
+\SetAthleticsProficiency{1}         % From background soldier     
+\SetDeceptionProficiency{0}            
+\SetHistoryProficiency{0}
+\SetInsightProficiency{0}
+\SetIntimidationProficiency{1}      % From background soldier
+\SetInvestigationProficiency{0}        
+\SetMedicineProficiency{1}          % From paladin
+\SetNatureProficiency{0}               
+\SetPerceptionProficiency{1}        % Da variant human        
+\SetPerformanceProficiency{0}
+\SetPersuasionProficiency{1}        % From paladin        
+\SetReligionProficiency{0}
+\SetSleightOfHandProficiency{0}        
+\SetStealthProficiency{0}              
+\SetSurvivalProficiency{0}             
+
+% The base modifier for each ability is calculated automatically from the ability scores using the formula:
+%  Skill value = Ability modifier + Proficiency Bonus (if proficient)
+% You can add an offset for racial traits, magic items, feats or other effects.
+\SetAcrobaticsSkillModifier{0}          % Base calculation, no offset
+\SetAnimalHandlingSkillModifier{0}      % Base calculation, no offset
+\SetArcanaSkillModifier{0}              % Base calculation, no offset
+\SetAthleticsSkillModifier{0}           % Base calculation, no offset
+\SetDeceptionSkillModifier{0}           % Base calculation, no offset
+\SetHistorySkillModifier{0}             % Base calculation, no offset
+\SetInsightSkillModifier{0}             % Base calculation, no offset
+\SetIntimidationSkillModifier{0}        % Base calculation, no offset
+\SetInvestigationSkillModifier{0}       % Base calculation, no offset
+\SetMedicineSkillModifier{0}            % Base calculation, no offset
+\SetNatureSkillModifier{0}              % Base calculation, no offset
+\SetPerceptionSkillModifier{0}          % Base calculation, no offset
+\SetPerformanceSkillModifier{0}         % Base calculation, no offset
+\SetPersuasionSkillModifier{0}          % Base calculation, no offset
+\SetReligionSkillModifier{0}            % Base calculation, no offset
+\SetSleightOfHandSkillModifier{0}       % Base calculation, no offset
+\SetStealthSkillModifier{0}             % Base calculation, no offset
+\SetSurvivalSkillModifier{0}            % Base calculation, no offset
+
+\Perception{\fpeval{10+\PerceptionSkillModifierValue}}
+
+\ArmorClass{
+    \fpeval{
+        16+ % Base AC for Chain mail
+        4+ % From shield
+        1 % From Defense fighting style
+    }
+}
+
+\Initiative{\DexterityModifierValue}
+
+\Speed{\parbox{40pt}{\centering 7.5~m
+\small{(4.5~swim)}}}
+
+% TODO: update manually
+\MaxHitPoints{    \fpeval{
+            10+
+            9+ % Roll lv 2
+            7+ % Roll lv 3
+            6+ % Roll lv 4
+            9+ % Roll lv 5
+            \ConstitutionModifierValue * \LevelValue+ % Total levels
+            2*\LevelValue+ % From tough feat
+            \LevelValue % From Hill Dwarf
+    }
+}
+
+\MaxHitDice{\ClassOneValue d10}
+\CurrentHitDice{\LevelValue}
+
+\CP{}
+\SP{}
+\GP{2}
+\EP{}
+\PP{}
+
+% p = piercing, s = slashing, b = bludgeoning, r = radiant, f = fire, c = cold, n = necrotic, a = acid, l = lightning, t = thunder, ps = psychic, hp = healing
+\AddWeapon{Long sword}{\fpeval{
+    \ProficiencyValue % If proficient with the weapon
+    + \StrengthModifierValue
+    }}{1d8+\StrengthModifierValue
+~/s}
+\AddWeapon{Dagger}{\fpeval{\ProficiencyValue+\DexterityModifierValue}}{d4+
+\DexterityModifierValue~/ % Because finesse weapon has dex modifier to damage
+(6/18)-% Dagger has range 6/18 m, beyond 6 m you have disadvantage, you can not throw beyond 18 m
+p}
+
+
+\AttacksAdditional{
+\textbf{Spell Name}: att. +x, dmg xdx/r\\
+}
+
+\OtherProficienciesLanguages{\textbf{Languages:} Common, Dwarvish\\ % From dwarf
+\textbf{Weapons}: All weapons\\ % Paladin
+\textbf{Armor}: All armor, shields\\ % Paladin
+\textbf{Vehicles}: Land\\ % Soldier background
+\textbf{Tools}: Dice set, Smith's tools\\ % Only proficiency
+}
+
+%% EQUIPMENT %%
+% Add equipment items using the \EquipmentItem{name of the equipment}{weight}{quantity} command
+
+\Equipment{
+\textbf{Weapons}: \EquipmentItem{Long sword}{1.5}{1},\EquipmentItem{Dagger}{0.5}{2}.\\
+\textbf{Armor}: \EquipmentItem{Chain mail}{27.5}{1}, \EquipmentItem{Shield}{9}{1}.\\
+\textbf{Tools}:\\ 
+\textbf{Mounts/Animals}:Mule\\
+\textbf{Misc}: \EquipmentItem{Common Clothes}{1.5}{1}, % From Soldier background
+\EquipmentItem{Holy symbol}{0.05}{1}, % From paladin
+\EquipmentItem{Pouch}{0.5}{1}, % From Urban Bounty Hunter background
+\EquipmentItem{Backpack}{2.5}{1}, % From Explorer's Pack
+\EquipmentItem{Bedroll}{3.5}{1}, % From Explorer's Pack
+\EquipmentItem{Mess kit}{0.5}{1}, % From Explorer's Pack
+\EquipmentItem{Tinderbox}{0.5}{1}, % From Explorer's Pack
+\EquipmentItem{Torches}{0.5}{10}, % From Explorer's Pack
+\EquipmentItem{Rations}{1}{10}, % From Explorer's Pack
+\EquipmentItem{Waterskin}{2.5}{1}, % From Explorer's Pack
+\EquipmentItem{Hempen rope (15 m)}{5}{1}\\ % From Explorer's Pack
+\EquipmentItem{Insignia of rank}{0.05}{1}\\ % From Soldier background
+\EquipmentItem{Pouch}{0.5}{1}, % From Soldier background
+\EquipmentItem{Set of bone dices}{0}{1}\\ % From Soldier background
+\\
+\textbf{Weight:} \EquipmentTotalWeight\ kg \\
+\textbf{Capacity:} \newcommand{\Capacity}{\fpeval{
+    \StrengthScoreValue*3+ % Homebrew carrying capacity formula
+    210 % Mule
+}}\Capacity\ kg\\
+\textbf{Residual capacity:} \fpeval{\Capacity - \EquipmentTotalWeight} kg
+}
+
+
+
+\PersonalityTraits{
+    % Character personality traits here
+}
+
+\Ideals{
+    % Character ideals here
+}
+
+\Bonds{
+    % Character bonds here
+}
+
+\Flaws{
+    % Character flaws here
+}
+
+
+\FeaturesTraits{
+% Character features and traits here
+\textbf{Stealth disadvantage}\\
+\textbf{Dexterity disadvantage}\\
+\textbf{Divine Sense}\\
+\textbf{Lay on Hands}\\
+\textbf{Extra Attack}-> can attack \textbf{twice} per turn.
+\textbf{Dark vision}-> can see in dark up to 18 m.\\
+\\
+\\
+\textbf{Stonecunning}-> \textbf{expertise} in \textbf{history} checks related to \textbf{stonework}.\\
+\textbf{Dwarven Resilience}-> \textbf{advantage} on saving throws against \textbf{poison}, \textbf{resistance} against poison damage.
+}
+
+\AdditionalFeaturesAndTraits{
+    % Additional character features and traits here
+}
+
+% Appearance
+
+\Age{xx}
+\Height{1.5 m}
+\Weight{75 kg}
+\Eyes{xx}
+\Skin{xx}
+\Hair{xx}
+
+% background
+
+\CharacterAppearance{
+\includegraphics[width=5.75cm]{images/grok.png}
+}
+
+
+
+\Characterbackground{
+    % Brief character background here
+ }
+
+\Treasure{
+    % Character treasure here
+}
+
+\AlliesAndOrganizations{
+    % Character allies and organizations here
+    Infantry officer of the Neverwinter army.
+}
+
+\OrganizationName{
+    % Organization name here
+    Neverwinter Army
+}
+\OrganizationSymbol{
+    \includegraphics[width=4.9cm,height=3.9cm]{images/Neverwinter_symbol}
+}
+
+
+%Magic
+\SpellcastingClass{Paladin}
+\SpellcastingAbility{CHAR}
+\SpellSaveDC{\fpeval{8+\ProficiencyValue+\CharismaModifierValue}}
+\SpellAttackBonus{\fpeval{\ProficiencyValue+\CharismaModifierValue}}
+
+\FirstLevelSpellSlotsTotal{4}
+\SecondLevelSpellSlotsTotal{2}
+
+\FirstLevelSpellSlotA{}
+\FirstLevelSpellSlotAPrepared{}
+\FirstLevelSpellSlotB{}
+\FirstLevelSpellSlotBPrepared{}
+\FirstLevelSpellSlotC{}
+\FirstLevelSpellSlotCPrepared{}
+\FirstLevelSpellSlotD{}
+\FirstLevelSpellSlotDPrepared{}
+\FirstLevelSpellSlotE{}
+\FirstLevelSpellSlotEPrepared{}
+\CantripSlotA{}
+\CantripSlotB{}
+\CantripSlotC{}
+\CantripSlotD{}
+
+\newcommand{\spellsheetchoice}{\renderspellsheet}
+
+
+\begin{document}
+\newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+\onecolumn
+
+
+% CHARACTER PAGE
+\pdfbookmark[0]{Character Sheet}{Character Sheet}
+\rendercharactersheet
+
+% BACKSTORY PAGE
+\pdfbookmark[0]{Background Sheet}{Background Sheet}
+\renderbackgroundsheet
+
+
+% SPELLCASTING PAGE
+\pdfbookmark[0]{Spellcasting Sheet}{Spellcasting Sheet}
+\spellsheetchoice
+
+% Character full background, or comment out if not needed
+\newpage
+\section{Full Character Background of \CharacterFullNameValue}
+    % Character full background here
+
+\end{document}
