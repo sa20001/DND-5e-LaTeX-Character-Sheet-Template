@@ -14,15 +14,16 @@
 \CharacterSurname{Thunderborn} % Optional surname, can be left empty
 \CharacterNickname{} % Optional nickname, can be left empty
 
-\ClassOne{5}
+\ClassOne{6}
 
 % adds only main class and total level to prevent overflow
-\Class{Paladino (\ClassOneValue)}
-\Background{Character background here}
+\Class{Paladin (\ClassOneValue)}
+% Paladin sacred oath: devotion
+\Background{Soldier}
 \PlayerName{Samy}
 \Race{Hill Dwarf}
-\Alignment{Character alignment here}
-\XP{} % xp or milestone progression
+\Alignment{LG}
+\XP{Milestone} % xp or milestone progression
 \Inspiration{} % number of inspiration points
 
 
@@ -32,7 +33,7 @@
 % Ability scores
 \StrengthScore{15}           % 6,5,4,2 = 15 
 \DexterityScore{12}          % 6,4,2,1 = 12
-\ConstitutionScore{17}       % 6,5,4,3 = 15 + 2 da Dwarf
+\ConstitutionScore{18}       % 6,5,4,3 = 15 + 2 da Dwarf + 1 (dwarven fortitude)
 \IntelligenceScore{9}       % 4,4,1,1 = 9 
 \WisdomScore{11}             % 3,2,3,5 = 11 + 1 Hill dwarf  
 \CharismaScore{15}           % 6,5,4,3 = 15
@@ -85,7 +86,7 @@
 \SetInvestigationProficiency{0}        
 \SetMedicineProficiency{1}          % From paladin
 \SetNatureProficiency{0}               
-\SetPerceptionProficiency{1}        % Da variant human        
+\SetPerceptionProficiency{1}        % Da dwarf        
 \SetPerformanceProficiency{0}
 \SetPersuasionProficiency{1}        % From paladin        
 \SetReligionProficiency{0}
@@ -119,7 +120,7 @@
 
 \ArmorClass{
     \fpeval{
-        16+ % Base AC for Chain mail
+        17+ % Base AC for Splint armor
         4+ % From shield
         1 % From Defense fighting style
     }
@@ -137,6 +138,7 @@
             7+ % Roll lv 3
             6+ % Roll lv 4
             9+ % Roll lv 5
+            7+ % Roll lv 6
             \ConstitutionModifierValue * \LevelValue+ % Total levels
             2*\LevelValue+ % From tough feat
             \LevelValue % From Hill Dwarf
@@ -148,7 +150,7 @@
 
 \CP{}
 \SP{}
-\GP{2}
+\GP{100}
 \EP{}
 \PP{}
 
@@ -180,7 +182,7 @@ p}
 
 \Equipment{
 \textbf{Weapons}: \EquipmentItem{Long sword}{1.5}{1},\EquipmentItem{Dagger}{0.5}{2}.\\
-\textbf{Armor}: \EquipmentItem{Chain mail}{27.5}{1}, \EquipmentItem{Shield}{9}{1}.\\
+\textbf{Armor}: \EquipmentItem{Splint armor}{30}{1}, \EquipmentItem{Shield}{9}{1}.\\
 \textbf{Tools}:\\ 
 \textbf{Mounts/Animals}:Mule\\
 \textbf{Misc}: \EquipmentItem{Common Clothes}{1.5}{1}, % From Soldier background
@@ -209,34 +211,41 @@ p}
 
 
 \PersonalityTraits{
-    % Character personality traits here
+    He is disciplined, measured in speech, and unwavering in his duties.
 }
 
 \Ideals{
-    % Character ideals here
+    Stability and order are the foundation of civilization and must be preserved.
 }
 
 \Bonds{
-    % Character bonds here
+    He is sworn to the city of Neverwinter and considers its people his sacred responsibility, vowing to always fight on the front lines.
 }
+
 
 \Flaws{
-    % Character flaws here
+    He obeys authority too readily and bears responsibility even when it is not his to carry.
 }
-
 
 \FeaturesTraits{
 % Character features and traits here
-\textbf{Stealth disadvantage}\\
-\textbf{Dexterity disadvantage}\\
-\textbf{Divine Sense}\\
-\textbf{Lay on Hands}\\
-\textbf{Extra Attack}-> can attack \textbf{twice} per turn.
-\textbf{Dark vision}-> can see in dark up to 18 m.\\
+\textbf{Disadvantage}: stealth, dexterity.\\ % from armour and shield
+\textbf{Advantage}: poison.\\% from dwarf
+\textbf{Resistance}: poison dmg, % from dwarf
+ diseases. \\ % from divine health
+\\
+\textbf{Divine Sense}: can use \fpeval{1 + \CharismaModifierValue} times per long rest.\\
+\textbf{Lay on Hands}: has \fpeval{5 * \LevelValue} HP pool, can use that pool to restore creature HP and/or 5 from that pool to heal all diseases.\\
+\textbf{Extra Attack}: can attack \textbf{twice} per turn.\\
+\textbf{Divine Smite}: if melee hit-> can expend spell slot to deal extra 1d8 per spell slot (e.g if spell slot is 2, are 2d8) radiant dmg on hit. If undead or fiend add 1d8.\\
+\textbf{Dark vision}: 18 m.\\
 \\
 \\
-\textbf{Stonecunning}-> \textbf{expertise} in \textbf{history} checks related to \textbf{stonework}.\\
-\textbf{Dwarven Resilience}-> \textbf{advantage} on saving throws against \textbf{poison}, \textbf{resistance} against poison damage.
+\textbf{Stonecunning}: \textbf{expertise} in \textbf{history} checks related to \textbf{stonework}.\\
+\textbf{Dwarven fortitude}: when take \textbf{dodge} action, can gain (1d10 + \ConstitutionModifierValue) HP (min 1).\\
+\textbf{Champion Challenge}:\\
+\textbf{Turn the Tide}:\\
+\textbf{Aura of protection}:\\
 }
 
 \AdditionalFeaturesAndTraits{
@@ -261,8 +270,12 @@ p}
 
 
 \Characterbackground{
-    % Brief character background here
- }
+    Raised in service to the crown, he spent his youth immersed in the strict disciplines of military and civic duty, learning that law, honor, and loyalty are more than ideals—they are the foundation upon which civilization stands. From early training in the barracks and city halls of Neverwinter, he was taught that personal desires must always yield to the greater needs of the city, and that a single oath carries the weight of countless lives. Swearing his allegiance not to a deity, but to the city itself, he came to believe that order is the true shield that protects the innocent, and that a city can only endure when its leaders act with both resolve and foresight.\\
+
+    He now serves as both enforcer and guardian of the sovereign's will, frequently taking on missions that lie beyond the reach of courts, councils, and bureaucrats. Whether quelling unrest in the streets or ensuring that justice is carried out where the law falters, he acts decisively, guided by the conviction that the stability of Neverwinter depends on those willing to act where others hesitate.\\
+
+    A past failure, one that resulted in the loss of lives under his temporary command, left an indelible mark upon him. Though offered promotion to a higher rank, he declined, believing that a true commander must face danger alongside their soldiers rather than directing them from a distance. Now he fights as a frontline officer, sharing the risks of every mission with those he leads, convinced that courage and leadership are inseparable, and that a commander earns authority through presence and example.
+}
 
 \Treasure{
     % Character treasure here
@@ -288,23 +301,122 @@ p}
 \SpellSaveDC{\fpeval{8+\ProficiencyValue+\CharismaModifierValue}}
 \SpellAttackBonus{\fpeval{\ProficiencyValue+\CharismaModifierValue}}
 
-\FirstLevelSpellSlotsTotal{4}
-\SecondLevelSpellSlotsTotal{2}
 
-\FirstLevelSpellSlotA{}
-\FirstLevelSpellSlotAPrepared{}
-\FirstLevelSpellSlotB{}
-\FirstLevelSpellSlotBPrepared{}
-\FirstLevelSpellSlotC{}
+\CantripSlotA{}
+\CantripSlotB{}
+\CantripSlotC{}
+\CantripSlotD{}
+
+
+\FirstLevelSpellSlotsTotal{4}
+
+\FirstLevelSpellSlotA{Command} % from oath of the crown
+\FirstLevelSpellSlotAPrepared{True}
+\FirstLevelSpellSlotB{Compelled Duel}
+\FirstLevelSpellSlotBPrepared{True}
+\FirstLevelSpellSlotC{Choose \fpeval{\CharismaModifierValue + (floor(\LevelValue/2))} prepared paladin spells x long rest}
 \FirstLevelSpellSlotCPrepared{}
 \FirstLevelSpellSlotD{}
 \FirstLevelSpellSlotDPrepared{}
 \FirstLevelSpellSlotE{}
 \FirstLevelSpellSlotEPrepared{}
-\CantripSlotA{}
-\CantripSlotB{}
-\CantripSlotC{}
-\CantripSlotD{}
+
+\SecondLevelSpellSlotsTotal{2}
+\SecondLevelSpellSlotA{Warding Bond}
+\SecondLevelSpellSlotAPrepared{True}
+\SecondLevelSpellSlotB{Zone of Truth}
+\SecondLevelSpellSlotBPrepared{True}
+\SecondLevelSpellSlotC{Choose \fpeval{\CharismaModifierValue + (floor(\LevelValue/2))} prepared paladin spells x long rest}
+\SecondLevelSpellSlotCPrepared{}
+\SecondLevelSpellSlotD{}
+\SecondLevelSpellSlotDPrepared{}
+\SecondLevelSpellSlotE{}
+\SecondLevelSpellSlotEPrepared{}
+
+\ThirdLevelSpellSlotsTotal{}
+\ThirdLevelSpellSlotA{}
+\ThirdLevelSpellSlotAPrepared{}
+\ThirdLevelSpellSlotB{}
+\ThirdLevelSpellSlotBPrepared{}
+\ThirdLevelSpellSlotC{}
+\ThirdLevelSpellSlotCPrepared{}
+\ThirdLevelSpellSlotD{}
+\ThirdLevelSpellSlotDPrepared{}
+\ThirdLevelSpellSlotE{}
+\ThirdLevelSpellSlotEPrepared{}
+
+\FourthLevelSpellSlotsTotal{}
+\FourthLevelSpellSlotA{}
+\FourthLevelSpellSlotAPrepared{}
+\FourthLevelSpellSlotB{}
+\FourthLevelSpellSlotBPrepared{}
+\FourthLevelSpellSlotC{}
+\FourthLevelSpellSlotCPrepared{}
+\FourthLevelSpellSlotD{}
+\FourthLevelSpellSlotDPrepared{}
+\FourthLevelSpellSlotE{}
+\FourthLevelSpellSlotEPrepared{}
+
+\FifthLevelSpellSlotsTotal{}
+\FifthLevelSpellSlotA{}
+\FifthLevelSpellSlotAPrepared{}
+\FifthLevelSpellSlotB{}
+\FifthLevelSpellSlotBPrepared{}
+\FifthLevelSpellSlotC{}
+\FifthLevelSpellSlotCPrepared{}
+\FifthLevelSpellSlotD{}
+\FifthLevelSpellSlotDPrepared{}
+\FifthLevelSpellSlotE{}
+\FifthLevelSpellSlotEPrepared{}
+
+\SixthLevelSpellSlotsTotal{}
+\SixthLevelSpellSlotA{}
+\SixthLevelSpellSlotAPrepared{}
+\SixthLevelSpellSlotB{}
+\SixthLevelSpellSlotBPrepared{}
+\SixthLevelSpellSlotC{}
+\SixthLevelSpellSlotCPrepared{}
+\SixthLevelSpellSlotD{}
+\SixthLevelSpellSlotDPrepared{}
+\SixthLevelSpellSlotE{}
+\SixthLevelSpellSlotEPrepared{}
+
+\SeventhLevelSpellSlotsTotal{}
+\SeventhLevelSpellSlotA{}
+\SeventhLevelSpellSlotAPrepared{}
+\SeventhLevelSpellSlotB{}
+\SeventhLevelSpellSlotBPrepared{}
+\SeventhLevelSpellSlotC{}
+\SeventhLevelSpellSlotCPrepared{}
+\SeventhLevelSpellSlotD{}
+\SeventhLevelSpellSlotDPrepared{}
+\SeventhLevelSpellSlotE{}
+\SeventhLevelSpellSlotEPrepared{}
+
+\EighthLevelSpellSlotsTotal{}
+\EighthLevelSpellSlotA{}
+\EighthLevelSpellSlotAPrepared{}
+\EighthLevelSpellSlotB{}
+\EighthLevelSpellSlotBPrepared{}
+\EighthLevelSpellSlotC{}
+\EighthLevelSpellSlotCPrepared{}
+\EighthLevelSpellSlotD{}
+\EighthLevelSpellSlotDPrepared{}
+\EighthLevelSpellSlotE{}
+\EighthLevelSpellSlotEPrepared{}
+
+\NinthLevelSpellSlotsTotal{}
+\NinthLevelSpellSlotA{}
+\NinthLevelSpellSlotAPrepared{}
+\NinthLevelSpellSlotB{}
+\NinthLevelSpellSlotBPrepared{}
+\NinthLevelSpellSlotC{}
+\NinthLevelSpellSlotCPrepared{}
+\NinthLevelSpellSlotD{}
+\NinthLevelSpellSlotDPrepared{}
+\NinthLevelSpellSlotE{}
+\NinthLevelSpellSlotEPrepared{}
+
 
 \newcommand{\spellsheetchoice}{\renderspellsheet}
 

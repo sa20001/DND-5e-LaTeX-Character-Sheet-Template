@@ -18,6 +18,8 @@
 \ClassTwo{2} 
 % adds only main class and total level to prevent overflow
 \Class{Rogue (\ClassOneValue) / Ranger (\ClassTwoValue)}
+% Rogue archetype: scout
+% Ranger sacred oath: gloom stalker
 \Background{\href{https://dnd.wizards.com/products/tabletop-games/rpg-products/scag}{Urban Bounty Hunter (SCAG)}}
 \PlayerName{Sam}
 \Race{Lightfoot Halfling}
@@ -285,8 +287,8 @@ Musical instrument. % From Urban Bounty Hunter background
 % Appearance
 
 \Age{28}
-\Height{0.97 m}
-\Weight{18 kg}
+\Height{0.85 m}
+\Weight{8.5 kg}
 \Eyes{Grey-blue}
 \Skin{Light tan}
 \Hair{Blonde-red}
@@ -326,7 +328,7 @@ Musical instrument. % From Urban Bounty Hunter background
 
 %Magic
 \SpellcastingClass{Ranger}
-\SpellcastingAbility{\WisdomModifierValue}
+\SpellcastingAbility{WIS}
 \SpellSaveDC{\fpeval{8+ \ProficiencyValue + \WisdomModifierValue}}
 \SpellAttackBonus{ \fpeval{\ProficiencyValue + \WisdomModifierValue}}
 
@@ -443,17 +445,21 @@ Musical instrument. % From Urban Bounty Hunter background
 
 \end{enumerate}
 
+% --- Combat sequences ---
+\subsection{Combat sequences}
+    First turn A/C then:
+    \begin{itemize}
+        \item B in ranged.
+        \item D in melee.
+    \end{itemize}
+
+
 % --- Defense ---
 \subsection{Defense}
 \begin{itemize}
     \item Reaction: \href{https://dnd5e.wikidot.com/rogue:scout#:~:text=Guide%20to%20Everything-,Skirmisher,-Starting%20at%203rd}{Skirmisher}
     \item Feature: \href{https://dnd5e.wikidot.com/feat:second-chance}{Second Chance}
 \end{itemize}
-
-\subsection{Combat sequences}
-\begin{enumerate}
-    \item First turn A/C then B or D if melee.
-\end{enumerate}
 
 \newpage
 
